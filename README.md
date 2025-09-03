@@ -1,2 +1,10 @@
+<div align="center">
+
 # Retracing-the-Path-of-Linear-Algebra
-Linear Algebra tutorial
+<hr>
+
+</div>
+
+This repository stores linear algebra tutorial.
+
+This tutorial uses CC-BY-SA-4.0 License.
