@@ -1,163 +1,45 @@
-\documentclass[12pt]{ctexart}
-\usepackage{xeCJK}
-\usepackage{fontspec}
-\usepackage{titlesec}
-% 设置全局字体为楷体
-\setCJKmainfont{KaiTi}[
-    BoldFont={SimHei}, % 使用黑体作为粗体
-    ItalicFont={STXinwei}, % 使用楷体作为斜体
-    BoldItalicFont={SimHei} % 使用黑体作为粗斜体
-]
-% 设置英文字体
-\setmainfont{Times New Roman}
+\documentclass[lang=en,color=blue,mode=fancy,titlestyle=hang]{elegantbook}
 
-% 设置section标题的字号
-\titleformat{\section}
-  {\normalfont\fontsize{26}{31.2}\bfseries}
-  {}
-  {0pt}
-  {}
+% ---- Title Information ----
+\title{Retracing the Path of Linear Algebra}
+\author{Lancet Ross}
+\date{Oct 1, 2026}
+\version{1.1}
+\extrainfo{``The contribution of mathematics, and of people, is not computation but intelligence. --- Gilbert Strang''}
 
-% 设置页面
+\cover{cover.pdf}
+
+% ---- Additional Packages ----
 \usepackage{amsmath}
-\usepackage{hyperref}
-\hypersetup{breaklinks=true}
-\usepackage{geometry}
-\usepackage{tabularx}
 \usepackage{array}
+\usepackage{booktabs}
 \usepackage{float}
 \usepackage{wrapfig}
-\usepackage{lastpage}
-\usepackage{titlesec}
-\usepackage{indentfirst}
-\usepackage{tikz}
-\usepackage{everypage}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{enumitem}
 \usepackage{caption}
 \captionsetup[figure]{labelformat=empty}
 \usepackage{xcolor}
-\usepackage{listings}
-\PassOptionsToPackage{hyphens}{url}
 \usepackage{url}
-\usepackage{xurl}
-\usepackage{hyperref}
-\hypersetup{breaklinks=true}
 \usepackage{tikz}
-% 插图片
-\usepackage{graphicx}
-% 设置摘要页缩减 
-\usepackage{changepage}
-% 设置页眉页脚
-\usepackage{fancyhdr}
-\setlength{\headheight}{12.64723pt}
-\addtolength{\topmargin}{-0.64723pt}
-% 清空页眉页脚
-\pagestyle{fancy}
-% 设置列表缩进
-\usepackage[shortlabels]{enumitem}
-% 设置修改默认的section标题大小
-\usepackage{titlesec}
-\titleformat*{\section}{\LARGE}
-\titleformat*{\subsection}{\Large}
-\titleformat*{\subsubsection}{\Large}
-% 使用数学宏包
-\usepackage{amsmath}
-% 设置表格的列格式
-\usepackage{array}
-% 三线表宏包
-\usepackage{booktabs}
-% 设置产考文献不输出默认名
-\usepackage{etoolbox}
-\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
-% 设置等宽的代码字体
+
+% ---- Fonts ----
 \setmonofont{Courier New}
-% 颜色
-\usepackage{xcolor}
-
-\lstset{
-  language=Matlab,
-  basicstyle=\small\ttfamily,       % 稍小的等宽字体
-  keywordstyle=\color{blue}\bfseries,  % 关键字蓝色加粗
-  commentstyle=\color{gray}\itshape,   % 注释灰色斜体
-  stringstyle=\color{orange},         % 字符串橙色
-  numbers=left,                       % 左侧显示行号
-  numberstyle=\tiny\color{gray},     % 行号样式
-  stepnumber=1,                       % 每行都编号
-  numbersep=8pt,                      % 行号与代码间距
-  showstringspaces=false,             % 不用特殊符号显示空格
-  breaklines=true,                    % 自动断行
-}
-
-% 绘制页面边框
-\usepackage{everypage}
-\AddEverypageHook{
-  \begin{tikzpicture}[remember picture, overlay]
-    \draw[thick] ([xshift=0.5cm, yshift=0.5cm]current page.south west) rectangle ([xshift=-0.5cm, yshift=-0.5cm]current page.north east);
-  \end{tikzpicture}
-}
-
-% 设置自定义字体
-\newfontfamily\customfont{Freestyle Script}
-\newfontfamily\haettenfont{Haettenschweiler}
-\setCJKmainfont{Microsoft YaHei}
-\setmainfont{TeX Gyre Termes}
-\renewcommand{\contentsname}{Table of Contents}
-
-% 引用格式
-\newenvironment{mdquote}
-{%
-  \par\noindent
-  \begin{list}{}{%
-      \setlength{\leftmargin}{1em}%
-      \setlength{\rightmargin}{0pt}%
-      \setlength{\itemindent}{0pt}%
-      \setlength{\listparindent}{\parindent}%
-      \setlength{\topsep}{0.5\baselineskip}%
-  }
-  \item[\textbf{>}\ ]\itshape
-}
-{\end{list}\par}
-
 
 \begin{document}
 
-% 标题页
-\begin{titlepage}
-    \centering
-    \vspace*{96pt}
-    \fontsize{26}{31.2}\selectfont{Retracing the Path of Linear Algebra}\par % 主标题
-    \vspace{39pt}
-    \fontsize{22}{26.4}\selectfont{\haettenfont v1 .0\normalfont}\par % 版本
-    \vspace{52.8pt}
-    \fontsize{18}{21.6}\selectfont{Author: \customfont{Lancet Ross}}\par % 作者
-    \fontsize{18}{21.6}\selectfont{Last Edited on: Sept 3rd, 2025}\par % 最后编辑时间
-    \vfill
-\end{titlepage}
+\maketitle
 
-% 目录页
-\newpage
-\thispagestyle{empty}
-\small
+\frontmatter
 \tableofcontents
-\newpage
-% 目录页后面是第一页
-\setcounter{page}{1}
 
-% 开始写正文
-% 设置正文的页边距
-\newgeometry{top=3cm, left=3.5cm, right=3.5cm}
-% 设置正文的页眉页脚
-\fancyhf{}
-\fancyhead[C]{ }
-% 此处修改右上角页码
-\fancyhead[R]{Page \thepage\ of\ \NoHyper\pageref{LastPage}\endNoHyper}
-\fancyhead[L]{\customfont Retracing the Path of Linear Algebra}
-\fancyfoot[C]{\bfseries\thepage}
+\mainmatter
 
-% 序言页
-\newpage
-\titleformat{\section}[block]{\normalfont\Large\bfseries\centering}{}{0pt}{}
-\section*{\textbf{Preface}}
-\addcontentsline{toc}{section}{Preface}
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\linespread{1.55}\selectfont
 
 I entered Electronic Engineering major of China University of Petroleum in 2023. I met
 Prof.\ Liu's Linear Algebra course in the first semester. Now I run into the third year of my
@@ -202,26 +84,29 @@ That's all I want to say. Now let's start our journey of linear algebra.
   Sept 2nd, 2025
 \end{flushright}
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \vspace*{96pt}
-    \fontsize{60}{60}\customfont{1}\par
-    \fontsize{26}{31.2}\section{\textbf{Solving linear equations}}\par % 标题
-    \vspace{25pt}
-    \begin{center}
-      \fontsize{18}{21.6}\customfont\textit{The contribution of mathematics, and of people,
-      is not computation but intelligence.}
-    \end{center}
-    \begin{flushright}
-      \fontsize{18}{21.6}\customfont\textit{--- Gilbert Strang}
-    \end{flushright}
-    \vfill
-\end{center}
+\linespread{1.2}\selectfont
 
-\fontsize{12}{14}
-\newpage
-\subsection{\textbf{Geometric interpretation of a system of equations}}
+\chapter{Solving linear equations}
+
+\subsection*{Overview}
+
+Everything in this tutorial grows out of one equation, $Ax = b$, and this chapter
+establishes the two ways to read it. The row picture draws each equation as a line or plane
+and asks where they meet. The column picture asks instead which combination of the columns
+of $A$ produces $b$. Both readings are correct, but the second one carries the whole
+subject.
+
+The middle of the chapter is the mechanics, and it is where the computation actually
+happens. Gaussian elimination turns a system into an upper triangular one that back
+substitution can finish. Matrix multiplication is introduced as composition, so elimination
+itself becomes a product of elementary matrices, and inverses follow from that.
+
+The chapter closes with $LU$ factorization, which is elimination written down as a product.
+It is the first appearance of a theme that runs through the tutorial: you understand a
+computation by factoring it.
+
+
+\section{Geometric interpretation of a system of equations}
 If given a system of equations, we can interpret it geometrically. For example, consider
 \begin{equation}
     \begin{aligned}
@@ -248,9 +133,9 @@ In linear algebra, we describe a system of equations as a matrix equation:
 
 This is what you must remember. Linear algebra just solves questions $Ax = b$.
 
-\subsubsection{\textbf{Row picture and column picture}}
+\subsection{Row picture and column picture}
 Now we can draw its row picture:
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/1.1 Geometric interpretation of
     a system of equations/Row picture.png}
@@ -267,7 +152,7 @@ eq. (1) can be interpreted as:
 \]
 
 And column picture:
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/1.1 Geometric interpretation of
     a system of equations/Column picture.png}
@@ -286,7 +171,7 @@ If you still think in terms of rows, then you will find that is almost impossibl
 visualize it. How can you know where the intersection of three planes is? That's why
 we always think in terms of columns.
 
-\subsubsection{\textbf{Solvability of $Ax = b$}}
+\subsection{Solvability of $Ax = b$}
 
 When you are in middle school, you must heard that some equations system has no solution.
 And this is similar to a question in linear algebra: Can $Ax = b$ be solved for any $b$?
@@ -303,7 +188,7 @@ which means they are linearly independent), then it's invertible. But if the 9th
 vector is just the same as the 8th, then the combinations of these 9 column vectors can
 only cover an 8-D space, which means the matrix is singular.
 
-\subsubsection{\textbf{An example of matrix multiplication}}
+\subsection{An example of matrix multiplication}
 
 Matrix multiplication is a very important operation in linear algebra. It can be
 interpreted as a linear combination of the columns of the first matrix. (Note that you
@@ -319,8 +204,8 @@ can still think in terms of rows, here we show a column example.)
   \begin{bmatrix} 12 \\7 \end{bmatrix}
 \]
 
-\subsection{\textbf{Matrix elimination}}
-\subsubsection{\textbf{Elimination}}
+\section{Matrix elimination}
+\subsection{Elimination}
 
 Gauss is a great mathematician. He invented a method to solve linear equations, which is
 called \textbf{elimination}. It is a very important method in linear algebra.
@@ -365,7 +250,7 @@ from the 3rd row:
   \end{bmatrix}
 \]
 
-Now we have a upper triangular matrix. This is called $U$.
+Now we have an upper triangular matrix. This is called $U$.
 
 When will the elimination fail? Actually it happens when the pivots are 0 (Always
 remember that pivots \textbf{CANNOT BE 0}) and no row exchange can be done. That is to
@@ -393,7 +278,7 @@ After that, we make an argumented matrix $[A\,|\,b]$:
 
 And we call the result $[U|c]$. $c$ is the result of $b$.
 
-\subsubsection{\textbf{Back substitution}}
+\subsection{Back substitution}
 
 Now we can solve the system of equations by back substitution. Just solve $Ux = c$.
 \begin{equation}
@@ -406,7 +291,7 @@ Now we can solve the system of equations by back substitution. Just solve $Ux = 
 
 This is easy, isn't it?
 
-\subsubsection{\textbf{Elimination matrices}}
+\subsection{Elimination matrices}
 
 Before we go further, we should know that matrix multiplication can be interpreted as
 a row operation. For example, a row vector $[1, 2, 7]$ multiples a $3 \times 3$ matrix,
@@ -437,7 +322,7 @@ The whole elimination process can be written as:
 \textbf{P.S.} In matrix multiplication, the associative property holds but the
 commutative property does \textbf{not}!
 
-\subsubsection{\textbf{Identity matrix and permutation matrix}}
+\subsection{Identity matrix and permutation matrix}
 
 Identity matrix $I$ is a matrix that has 1s on the diagonal and 0s elsewhere. It is
 the multiplicative identity of matrices, which means $AI = A$ and $IA = A$.
@@ -474,17 +359,17 @@ another matrix. See the following example:
   \end{bmatrix}
 \]
 
-\subsection{\textbf{Matrix multiplication}}
-\subsubsection{\textbf{Definition}}
+\section{Matrix multiplication}
+\subsection{Definition}
 
 Matrix multiplication is defined when the number of columns of the first matrix is
 equal to the number of rows of the second matrix. For example, a $m \times n$ matrix
 $A$ can be multiplied by a $n \times p$ matrix $B$, and the result is a $m \times p$
 matrix $C$.
 
-\subsubsection{\textbf{Calculation methods}}
+\subsection{Calculation methods}
 
-Normally, we have such a equation for individual elements:
+Normally, we have such an equation for individual elements:
 \[
   C_{ij} = \sum_{k=1}^{n} A_{ik} B_{kj}
 \]
@@ -544,8 +429,8 @@ separately and then combine them. This is called \textbf{block matrix multiplica
 
 It is clear that here we use the method 1 to calculate the blocks.
 
-\subsection{\textbf{Inverse}}
-\subsubsection{\textbf{Definition}}
+\section{Inverse}
+\subsection{Definition}
 
 We only talk about \textbf{square matrices} in this section. An invertible matrix $A$
 has an inverse matrix $A^{-1}$ such that $A^{-1}A = I$ (left inverse) and $AA^{-1} = I$
@@ -556,7 +441,7 @@ If a matrix is not invertible, then it is called a singular matrix. We have a wa
 determine whether a matrix is singular that if there is a $x \neq 0$ makes $Ax = 0$,
 then $A$ is singular.
 
-\subsubsection{\textbf{Calculation}}
+\subsection{Calculation}
 
 To calculate the inverse of a matrix is not easy. \textbf{Gauss-Jordan elimination}
 gives us a way.
@@ -585,7 +470,7 @@ left part of the argumented matrix to $I$.
 But why? This is the smart point of Gauss-Jordan elimination. Calculate $E [A\,|\,I]$
 gives $[I\,|\,A^{-1}]$. Well, because $EA = I$ and $A^{-1}A = I$ so $EI = A^{-1}$, clearly.
 
-\subsubsection{\textbf{Some matrices' inverses}}
+\subsection{Some matrices' inverses}
 
 First one is $AB$, we have:
 \[
@@ -603,8 +488,8 @@ and columns of a matrix. And we have:
 
 That is to say, inverse and transpose can exchange their order for a matrix.
 
-\subsection{\textbf{LU factorization}}
-\subsubsection{$A = LU$}
+\section{LU factorization}
+\subsection{$A = LU$}
 
 Through eliminate, we have get $EA = U$, where $E$ is the elimination matrix and $U$ is
 the upper triangular matrix. And we can change it to $A = LU$, where $L$ is the lower
@@ -665,13 +550,13 @@ conflict with each other in $L$. So writing $L$ really don't need calculations. 
 you need to do is just to write down the multipliers of the elimination. And this is
 exactly the reason why $L$ is better.
 
-\subsubsection{$PA = LU$ \textbf{, permutation matrix and transpose}}
+\subsection{$PA = LU$ \textbf{, permutation matrix and transpose}}
 
 Not all matrices can be eliminated without row exchanges. So we have to use permutation
 matrices $P$ to do row exchanges. Then we have $PA = LU$. This is called \textbf{LU
 factorization with pivoting}.
 
-Here we will talk more about $P$. There is a important property of $P$:
+Here we will talk more about $P$. There is an important property of $P$:
 \[
   P^{-1} = P^{T} \quad or \quad P^{2} = P^{T}P = I
 \]
@@ -690,26 +575,25 @@ Here's the proof:
 
 Remember, inverse and transpose exchange matrix order.
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \vspace*{96pt}
-    \fontsize{60}{60}\customfont{2}\par
-    \fontsize{26}{31.2}\section{\textbf{Vector spaces}}\par % 标题
-    \vspace{25pt}
-    \begin{center}
-      \fontsize{18}{21.6}\customfont\textit{The important thing is not to stop
-    questioning. Curiosity has its own reason for existing.}
-    \end{center}
-    \begin{flushright}
-      \fontsize{18}{21.6}\customfont\textit{--- Albert Einstein}
-    \end{flushright}
-    \vfill
-\end{center}
+\chapter{Vector spaces}
 
-\fontsize{12}{14}
-\newpage
-\subsection{\textbf{Vector space and subspace}}
+\subsection*{Overview}
+
+Chapter 1 worked with concrete systems of equations, and this chapter steps back to ask
+what kind of object we have been working with all along. A vector space is any set where
+addition and scalar multiplication behave the way they do in $\mathbb{R}^n$, and almost
+everything proved here holds for all of them at once.
+
+The chapter then returns to matrices with that vocabulary. The column space and null space
+of $A$ are subspaces, and row reduction produces bases for both, which leads to the four
+fundamental subspaces and the relations between their dimensions.
+
+The last sections cover linear independence, basis and dimension. The chapter ends with
+graphs and networks, where an incidence matrix turns a picture into a matrix and the
+subspaces acquire a physical meaning.
+
+
+\section{Vector space and subspace}
 
 A vector space is a set of vectors that can be added together and multiplied by scalars
 (scalars are real numbers). A vector space must satisfy many properties. But we don't
@@ -736,11 +620,11 @@ a line through the origin and the whole $R^{3}$ itself. Again, not all planes ar
 subspaces except the planes through the origin.
 
 Let's be next, consider two subspaces $P$ and $L$ of $R^{3}$. Is $P \cap L$ a subspace?
-No. Because it is not closed under addition. 2 vectors, one in $P$ and the other in $L$,
+No. Because it is not closed under addition. two vectors, one in $P$ and the other in $L$,
 their sum may not be in $P \cap L$. What about $P \cup L$? Yes. And this forms a smaller
 subspace. Normally, subspace intersection is a subspace, but union is not.
 
-\subsection{\textbf{Column space and null space}}
+\section{Column space and null space}
 
 Column space $C(A)$ is the set of all linear combinations of the columns of a matrix
 $A$. It is a subspace of $R^{m}$, where $m$ is the number of rows of $A$.
@@ -775,8 +659,8 @@ Most of the time, $N(A)$ is solved by elimination. And when the matrix is invert
 then $N(A) = \{0\}$. It's said that only singular matrices have non-trivial null
 spaces.
 
-\subsection{\textbf{Solution of $Ax = 0$ and} \textit{rref()}}
-\subsubsection{\textbf{Solution of $Ax = 0$}}
+\section{Solution of $Ax = 0$ and \textit{rref()}}
+\subsection{Solution of $Ax = 0$}
 Consider a matrix:
 \[
   A = \begin{bmatrix}
@@ -837,7 +721,7 @@ columns. Here we have 2 free columns, so $N(A)$ is a 2-D space in $R^{4}$.
 So the conclusion is that for a $m \times n$ matrix of rank $r$, the number of free
 columns is $n - r$ which means that $N(A)$ is a $(n - r)$-D space in $R^{n}$.
 
-\subsubsection{\textit{rref()}}
+\subsection{\textit{rref()}}
 
 Now let's talk about a matrix $R$ which is called \textbf{reduced row echelon form}
 of $A$. It is got by further eliminating $U$ to make the pivots be 1 and the other
@@ -883,7 +767,7 @@ Let's create a nullspace matrix $N$ that $RN = 0$, then we have:
 Do you see it? This is exactly the special solutions we talked about before.
 So we can use \textit{rref()} to solve $N(A)$ quite easily.
 
-\subsection{\textbf{Complete solution of $Ax = b$}}
+\section{Complete solution of $Ax = b$}
 
 Just like $Ax = 0$, $Ax = b$ is solvable only when $b$ is in $C(A)$.
 
@@ -925,8 +809,8 @@ $Ax = b$ has exactly 1 solution for any $b$. And $N(A) = \{0\}$.
 Last, when $r < m$ and $r < n$. This is the case of low rank. Here $Ax = b$ has either 0 or
 infinite solutions. When $b$ is in $C(A)$, then $Ax = b$ has infinite solutions.
 
-\subsection{\textbf{Linear independence, basis and dimension}}
-\subsubsection{\textbf{Linear independence}}
+\section{Linear independence, basis and dimension}
+\subsection{Linear independence}
 
 A set of vectors is linearly independent if the only solution to the equation
 \[
@@ -938,7 +822,7 @@ is $c_1 = c_2 = \cdots = c_n = 0$. Otherwise, the set is linearly dependent.
 If all column vectors of a matrix are linearly independent, then the nullspace of
 the matrix is $\{0\}$. And the matrix is of full column rank.
 
-\subsubsection{\textbf{Basis and dimension}}
+\subsection{Basis and dimension}
 
 Before basis, we need to introduce span. The span of a set of vectors is the set of all
 linear combinations of those vectors. For example, the span of two linearly independent
@@ -958,7 +842,7 @@ space is invertible (because they are linearly independent). Second, every set o
 space has the same number of vectors, this number is called the \textbf{dimension} of
 the vector space. For a 2-D matrix $A$, we say that $\dim(A) = 2$.
 
-Now we come to the most beautiful part. There is a equation:
+Now we come to the most beautiful part. There is an equation:
 \[
   \text{rank}(A) = \dim(C(A)) \quad \& \quad \text{rank}(A) + \dim(N(A)) = n
 \]
@@ -969,7 +853,7 @@ are linearly independent. Second, any column of $A$ can be expressed as a linear
 combination of the pivot columns. So the pivot columns span $C(A)$. So they form a
 basis of $C(A)$.
 
-\subsection{\textbf{Four fundamental subspaces}}
+\section{Four fundamental subspaces}
 
 There are 4 fundamental subspaces of a matrix $A$:
 \begin{itemize}
@@ -1023,11 +907,11 @@ Remember LU factorization? Here we have $EA = R$:
 See $EA = R$ in row view, $m - r$ rows vector in the bottom of $E$ makes $EA = 0$.
 In this example, $m - r = 1$, so the last row of $E$ is a basis of $N(A^{T})$.
 
-\subsection{\textbf{Graph and network}}
-\subsubsection{\textbf{Graph}}
+\section{Graph and network}
+\subsection{Graph}
 
 Here is an example of a graph:
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.56\textwidth]{assets/2.7 Graph and network/Graph.png}
   \caption{A graph with 4 nodes and 5 edges}
@@ -1072,7 +956,7 @@ go into details here.
 If edge 3 and 4 are deleted, then the graph becomes a \textbf{tree}. A tree is a graph
 with no loops.
 
-\subsubsection{\textbf{Inference}}
+\subsection{Inference}
 
 We already know that $N(A^{T}) = m - r$ and $r = n - 1$ in a connected graph. So we have:
 \[
@@ -1094,26 +978,25 @@ $y = Ce$ and external power supply influence as $f$. So we have:
   A^{T}y = A^{T}Ce = A^{T}CAx = f
 \]
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \vspace*{96pt}
-    \fontsize{60}{60}\customfont{3}\par
-    \fontsize{26}{31.2}\section{\textbf{Orthogonality}}\par % 标题
-    \vspace{25pt}
-    \begin{center}
-      \fontsize{18}{21.6}\customfont\textit{Logic is the foundation of the certainty of all
-      the knowledge we acquire.}
-    \end{center}
-    \begin{flushright}
-      \fontsize{18}{21.6}\customfont\textit{--- Leonhard Euler}
-    \end{flushright}
-    \vfill
-\end{center}
+\chapter{Orthogonality}
 
-\newpage
-\subsection{\textbf{Orthogonal vector and orthogonal subspace}}
-\subsubsection{\textbf{Definition}}
+\subsection*{Overview}
+
+Right angles make linear algebra computable. When a basis is orthogonal, the coefficients
+of a vector in that basis are just dot products, and no matrix has to be inverted at all.
+That single fact drives the whole chapter.
+
+We start with orthogonal vectors and orthogonal subspaces, then move to projection. The
+projection of $b$ onto a subspace is the closest point to $b$ inside it, and finding it
+leads to the normal equations, which is where least squares comes from.
+
+The chapter ends with the Gram-Schmidt process, which manufactures an orthogonal basis out
+of any basis, and with $QR$ factorization, which is Gram-Schmidt written as a matrix
+product.
+
+
+\section{Orthogonal vector and orthogonal subspace}
+\subsection{Definition}
 
 Orthogonality is common in mathematics. Two vectors are orthogonal if their dot product
 is 0. That is:
@@ -1130,7 +1013,7 @@ orthogonal because the line $c[0, 1, 0]^T$ is in both planes.
 Actually we can say that two subspaces are orthogonal only when their intersection is
 $\{0\}$. Otherwise, they must be not orthogonal. 
 
-\subsubsection{\textbf{Orthogonal complement}}
+\subsection{Orthogonal complement}
 
 Row space $C(A^{T})$ and null space $N(A)$ are orthogonal. Left null space $N(A^{T})$
 and column space $C(A)$ are orthogonal.
@@ -1146,13 +1029,13 @@ $C(A^{T})$ and $N(A)$ together span $R^{n}$. So $N(A)$ contains all vectors that
 orthogonal to $C(A^{T})$. This is called \textbf{orthogonal complement}. And this is also
 true for $N(A^{T})$ and $C(A)$.
 
-\subsection{\textbf{Orthogonal projection}}
-\subsubsection{\textbf{Derivation}}
+\section{Orthogonal projection}
+\subsection{Derivation}
 
 Projection of a vector $b$ onto a subspace $S$ is to find a vector $p$ in $S$ that is
 closest to $b$. The error vector $e = b - p$ is orthogonal to $S$. This is called
 \textbf{orthogonal projection}.
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{assets/3.2 Orthogonal projection/Orthogonal projection.png}
   \caption{Orthogonal projection}
@@ -1186,9 +1069,9 @@ A\hat{x}) = 0$, then:
 And the properties of $P$ are the same as before. By the way, this is the kernel of
 \textbf{least squares method}.
 
-\subsubsection{\textbf{An important proof of $A^{T}A$}}
+\subsection{An important proof of $A^{T}A$}
 
-There is a important property of $A^{T}A$ that if $A$ has linear independent columns,
+There is an important property of $A^{T}A$ that if $A$ has linear independent columns,
 then $A^{T}A$ is invertible. Here is the proof.
 
 Suppose $A^{T}Ax = 0$. We must prove that $x = 0$. We can play a trick:
@@ -1198,8 +1081,8 @@ Suppose $A^{T}Ax = 0$. We must prove that $x = 0$. We can play a trick:
 
 Because $A$ has linear independent columns, then $x = 0$. So the proof is complete.
 
-\subsection{\textbf{Orthogonal basis and orthogonal matrix}}
-\subsubsection{\textbf{Orthogonal basis}}
+\section{Orthogonal basis and orthogonal matrix}
+\subsection{Orthogonal basis}
 
 No one wants to see lots of square roots in calculations. So orthogonal basis is defined
 as a set of \textbf{orthonormal vectors} that span a space. Orthonormal means that the
@@ -1214,7 +1097,7 @@ vectors are orthogonal and of unit length, here is the formula:
 And orthogonal basis contains $q_1, q_2, \ldots, q_n$. By the way, it is column basis
 normally.
 
-\subsubsection{\textbf{Orthogonal matrix}}
+\subsection{Orthogonal matrix}
 
 Orthogonal matrix $Q$ is a \textbf{square} (not a must but usually) matrix whose columns
 form an orthonormal basis. And we have:
@@ -1249,8 +1132,8 @@ Now we can rewrite the least squares formula:
 
 That means $\hat{x_i} = $$q_i^{T}b$.
 
-\subsection{\textbf{QR factorization}}
-\subsubsection{\textbf{Gram-Schmidt process}}
+\section{QR factorization}
+\subsection{Gram-Schmidt process}
 
 Gram-Schmidt process is a method to convert a set of basis to an orthogonal basis. Suppose
 we have three vectors $a, b, c$, then we can convert them to orthogonal vectors $q_1, q_2,
@@ -1272,7 +1155,7 @@ Finally, make $A, B, C$ be of unit length to get $q_1, q_2, q_3$:
   q_1 = \frac{A}{||A||}, \quad q_2 = \frac{B}{||B||}, \quad q_3 = \frac{C}{||C||}
 \]
 
-\subsubsection{\textbf{QR factorization}}
+\subsection{QR factorization}
 
 QR factorization is another important method to factor a matrix $A$, which decompose
 $A$ into the product of an orthogonal matrix $Q$ and an upper triangular matrix $R$:
@@ -1280,7 +1163,7 @@ $A$ into the product of an orthogonal matrix $Q$ and an upper triangular matrix 
 A = QR
 \]
 
-$R$ contains the coefficients from Gram-Schmidt process. Here's a example of $2 \times 2$
+$R$ contains the coefficients from Gram-Schmidt process. Here's an example of $2 \times 2$
 matrix.
 \[
   Q = \begin{bmatrix} q_1 & q_2 \end{bmatrix} \quad
@@ -1290,27 +1173,25 @@ matrix.
   \end{bmatrix}
 \]
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \vspace*{96pt}
-    \fontsize{60}{60}\customfont{4}\par
-    \fontsize{26}{31.2}\section{\textbf{Determinants}}\par % 标题
-    \vspace{25pt}
-    \begin{center}
-      \fontsize{18}{21.6}\customfont\textit{It is not knowledge, but the act of learning,
-      not the possession of but the act of getting there, which grants the greatest
-      enjoyment.}
-    \end{center}
-    \begin{flushright}
-      \fontsize{18}{21.6}\customfont\textit{--- Friedrich Gauss}
-    \end{flushright}
-    \vfill
-\end{center}
+\chapter{Determinants}
 
-\newpage
-\subsection{\textbf{Determinants and its properties}}
-\subsubsection{\textbf{Determinants with properties 1, 2 and 3}}
+\subsection*{Overview}
+
+The determinant is a single number attached to a square matrix. It measures how the matrix
+scales volume and decides whether the matrix is invertible, since a determinant of zero
+means the columns are dependent and the volume collapses.
+
+The chapter develops the properties first, because they are what you actually compute with.
+Many of them reduce a determinant to a simpler one, and one of them makes row reduction a
+method for evaluating determinants rather than a separate theory.
+
+Then come the cofactor formula, which expands a determinant along a row, and Cramer's rule,
+which solves $Ax = b$ using determinants. Cramer's rule is elegant but expensive, and in
+practice elimination is what you use.
+
+
+\section{Determinants and its properties}
+\subsection{Determinants with properties 1, 2 and 3}
 
 This is the first chapter of TJU's Linear Algebra book. The difference is striking.
 
@@ -1348,11 +1229,11 @@ Now the property 3:
   \end{vmatrix} \tag{3b}
 \end{align*}
 
-Here is a important thing to notice of property 3b. This symbolizes that every row
+Here is an important thing to notice of property 3b. This symbolizes that every row
 is linear but not the matrix. So it is \textbf{WRONG} to say that $\det(A + B) =
 \det A + \det B$.
 
-\subsubsection{\textbf{Properties 4 to 10}}
+\subsection{Properties 4 to 10}
 
 \begin{enumerate}[start=4,label=(\arabic*)]
   \item If a matrix has same rows, then its determinant is 0.
@@ -1396,15 +1277,15 @@ property 3a to get $\det R = $ product of pivots.
 
 Property 8 is the same as property 6 by elimination.
 
-Property 9 tells us 3 things.
+Property 9 tells us three things.
 \begin{align*}
   \det A^{-1} &= 1/\det A \\
   \det A^2 &= (\det A)^2 \\
   \det mA &= m^n \det A
 \end{align*}
 
-\subsection{\textbf{Formula of determinants and Cofactor}}
-\subsubsection{\textbf{Formula of determinants}}
+\section{Formula of determinants and Cofactor}
+\subsection{Formula of determinants}
 
 First we calculate the determinant of a $2 \times 2$ matrix:
 \[
@@ -1454,7 +1335,7 @@ And we can summarize it to a simpler form:
   \quad (i, j, k, \ldots, m \text{ are permutations of } 1, 2, 3, \ldots, n)
 \]
 
-\subsubsection{\textbf{Cofactor}}
+\subsection{Cofactor}
 
 Cofactor is a useful tool to calculate determinants. The cofactor $C_{ij}$ is defined as:
 \[
@@ -1495,8 +1376,8 @@ In fact cofactors decrease a matrix's order by 1. So we can use cofactors to cal
 low order determinants more efficiently. But when facing a much high order matrix, this
 method's complexity is too high. So we have to use elimination.
 
-\subsection{\textbf{Cramer's rule}}
-\subsubsection{\textbf{Formula of $A^{-1}$}}
+\section{Cramer's rule}
+\subsection{Formula of $A^{-1}$}
 
 We assume a cofactor matrix $C$ which contains all cofactors of $A$. And we have:
 \[
@@ -1521,7 +1402,7 @@ This is quite hard to understand, let's explain it in detail. When $i \neq j$, w
 $B$ is the matrix that replaces the $j$-th row of $A$ with its $i$-th row. ($a_{ik} \,
 \text{becomes} \, b_{jk}$). Because $B$ has two same rows, then $\det B = 0$.
 
-\subsubsection{\textbf{Cramer's rule}}
+\subsection{Cramer's rule}
 
 According to $Ax = b$, and the formula of $A^{-1}$, we have:
 \[
@@ -1537,27 +1418,27 @@ $B_i$ is the matrix $A$ with the $i$-th column replacesd by $b$.
 
 Well, this is Cramer's rule. And there must be someone asking what the difference
 between this and elimination is. Cramer's rule is not efficient when $n$ is large. It
-costs lifelong to calculate all these determinants. But it provides a explicit formula of
+costs lifelong to calculate all these determinants. But it provides an explicit formula of
 $x$. So it is not recommended to use Cramer's rule to calculate.
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \vspace*{96pt}
-    \fontsize{60}{60}\customfont{5}\par
-    \fontsize{26}{31.2}\section{\textbf{Eigenvalue and eigenvector}}\par % 标题
-    \vspace{25pt}
-    \begin{center}
-      \fontsize{18}{21.6}\customfont\textit{Men pass away, but their deeds abide.}
-    \end{center}
-    \begin{flushright}
-      \fontsize{18}{21.6}\customfont\textit{--- Augustin Louis Cauchy}
-    \end{flushright}
-    \vfill
-\end{center}
+\chapter{Eigenvalue and eigenvector}
 
-\newpage
-\subsection{\textbf{Eigenvalue and eigenvector}}
+\subsection*{Overview}
+
+An eigenvector is a direction that a matrix does not rotate. Multiplying by $A$ stretches
+or shrinks it, and the factor is the eigenvalue, so finding these directions turns a matrix
+into something diagonal at heart.
+
+The chapter begins with the definition and the characteristic equation, then covers
+diagonalization. A matrix with enough independent eigenvectors can be written as
+$S \Lambda S^{-1}$, and once it is in that form, powers of the matrix become trivial.
+
+Symmetric matrices are the well-behaved case and positive definite matrices are the best of
+all. The chapter also covers similar matrices, and ends with the singular value
+decomposition, which does for any matrix what diagonalization does for a symmetric one.
+
+
+\section{Eigenvalue and eigenvector}
 
 Eigenvector $x$ and eigenvalue $\lambda$ of a \textbf{square} matrix $A$ satisfy:
 \[
@@ -1592,7 +1473,7 @@ Then we have:
 
 And solve $x$ by $\lambda$ is easy. We don't go into details here.
 
-We can simply infer 2 things:
+We can simply infer two things:
 \begin{itemize}
   \item $(A + nI) x = (\lambda + n) x$, which means that the eigenvalues of $A + nI$
   are $\lambda + n$ and the eigenvectors are the same.
@@ -1627,7 +1508,7 @@ symmetric, its eigenvalues are real. A critical example is the \textbf{rotation 
 
 You can verify that the eigenvalues of $Q$ are $i$ and $-i$.
 
-And also a example which has only 1 eigenvector:
+And also an example which has only 1 eigenvector:
 \[
   A = \begin{bmatrix}
     3 & 1 \\
@@ -1638,8 +1519,8 @@ And also a example which has only 1 eigenvector:
 You can find that $\lambda_1 = \lambda_2 = 3$, and the only eigenvector is
 $[1, 0]^T$. We will talk about this later.
 
-\subsection{\textbf{Diagonalization}}
-\subsubsection{\textbf{Diagonalization}}
+\section{Diagonalization}
+\subsection{Diagonalization}
 
 Set $S$ as the matrix whose columns are eigenvectors of $A$, and $\Lambda$ as a diagonal
 matrix whose diagonal entries are eigenvalues of $A$. Then we have:
@@ -1672,7 +1553,7 @@ beautiful factorization when calculating $A^k$:
 Upon this, we can easily get a theorem: $\lim_{k \to \infty} A^k = 0$ when all
 eigenvalues of $A$ are less than 1 in absolute value.
 
-\subsubsection{\textbf{Conditions of diagonalization}}
+\subsection{Conditions of diagonalization}
 
 $S$ is invertible when $A$ has $n$ linearly independent eigenvectors. And there is a
 sufficient condition: \textbf{all eigenvalues of $A$ are distinct}. But this is not necessary.
@@ -1683,8 +1564,8 @@ The example is in the last of 5.1.
 But don't be too worried. most of the matrices we meet are diagonalizable. Those which
 have multiple eigenvalues are really rare.
 
-\subsection{\textbf{Symmetric matrix}}
-\subsubsection{\textbf{Properties and its proof}}
+\section{Symmetric matrix}
+\subsection{Properties and its proof}
 
 Symmetric matrix is a very important kind of matrix which obeys $A = A^{T}$. It has many
 good properties. We give 2 of them first:
@@ -1760,7 +1641,7 @@ There is another important property of symmetric matrix. Signs of pivots and eig
 are the same and number of pivots and number of positive eigenvalues are the same. We
 won't prove it here.
 
-\subsubsection{\textbf{Spectral theorem}}
+\subsection{Spectral theorem}
 
 Normally a matrix $A$ can be factorized to $S\Lambda S^{-1}$. But a symmetric matrix is
 more than that. It can be factorized to $Q\Lambda Q^{T}$. This is called \textbf{spectral
@@ -1774,8 +1655,8 @@ We can write down this formula:
 This means that $A$ can be seen as the sum of $n$ projection matrices scaled by
 eigenvalues.
 
-\subsection{\textbf{Positive definite matrix}}
-\subsubsection{\textbf{Positive definite matrix}}
+\section{Positive definite matrix}
+\subsection{Positive definite matrix}
 
 All positive definite matrices are symmetric so all matrices we talk about are symmetric
 in this section.
@@ -1800,7 +1681,7 @@ For a $2 \times 2$ matrix, this is equivalent to the following conditions. By th
 
 Those satisfied $x^{T}Ax \geq 0$ are called \textbf{positive semi-definite matrices}.
 
-\subsubsection{\textbf{Minimum of a function}}
+\subsection{Minimum of a function}
 
 Let's take an example.
 \[
@@ -1840,7 +1721,7 @@ The coefficients in the completed square are the elimination multipliers, and th
 out of the square are the pivots.
 
 If we let $f(x, y) = 2x^2 + 12xy + 20y^2 = 1$, then we get an ellipse.
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{assets/5.4 Positive definition matrix/Ellipse.png}
   \caption{Ellipse of $f(x, y) = 1$}
@@ -1865,7 +1746,7 @@ If the second derivative matrix is like this:
 Then the condition of a minimum is $f_{xx} > 0$ and $f_{xx}f_{yy} - f_{xy}^2 > 0$.
 This is just what you have learned in higher mathematics.
 
-\subsubsection{\textbf{Axis theorem}}
+\subsection{Axis theorem}
 
 Assume a $3 \times 3$ matrix:
 \[
@@ -1882,7 +1763,7 @@ We know:
 \]
 
 Here is the figure of $f(x, y, z) = 1$.
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{assets/5.4 Positive definition matrix/Ellipsoid.png}
   \caption{Ellipsoid of $f(x, y, z) = 1$}
@@ -1892,7 +1773,7 @@ The three axes of the ellipsoid are determined by eigenvectors of $A$ and the le
 of the axes are determined by eigenvalues of $A$. This is called \textbf{axis theorem}
 in physicals, another name of spectral theorem.
 
-\subsection{\textbf{Similar matrix}}
+\section{Similar matrix}
 
 Suppose $A$ and $B$ are \textbf{square} matrices. If there exists a $M$ such that
 $B = MAM^{-1}$, then $A$ and $B$ are similar.
@@ -1935,7 +1816,7 @@ When $d = n$, $J = \Lambda$. So diagonalization is a special case of Jordan form
 other cases are not so good. You have to calculate $J^k$ by hand. Nowadays almost all
 ones talk about the good case, diagonalization.
 
-\subsection{\textbf{Singular value decomposition}}
+\section{Singular value decomposition}
 
 Singular value decomposition (SVD) is the fourth method to factor a matrix. It can be
 applied to any $m \times n$ matrix $A$. And it has many applications in data science.
@@ -1983,24 +1864,23 @@ $r$ is the rank of $A$. Then we have:
 Because $Av_i = \sigma_i u_i$ and there are no coupled terms. That proves they are the
 proper bases.
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \vspace*{96pt}
-    \fontsize{60}{60}\customfont{6}\par
-    \fontsize{26}{31.2}\section{\textbf{Linear Transformations}}\par % 标题
-    \vspace{25pt}
-    \begin{center}
-      \fontsize{18}{21.6}\customfont\textit{We must know, we will know!}
-    \end{center}
-    \begin{flushright}
-      \fontsize{18}{21.6}\customfont\textit{--- David Hilbert}
-    \end{flushright}
-    \vfill
-\end{center}
+\chapter{Linear Transformations}
 
-\newpage
-\subsection{\textbf{Linear transformation}}
+\subsection*{Overview}
+
+So far a matrix has been a table of numbers, and this chapter treats it as a function
+instead. A linear transformation is a map that respects addition and scalar multiplication,
+and every such map can be represented by a matrix once a basis is chosen.
+
+That last clause is the point of the chapter. The matrix of a transformation depends on the
+basis while the transformation itself does not, so change of basis changes the matrix
+without changing the map, and the resulting relation between matrices is called similarity.
+
+The chapter closes with inverses and pseudoinverses, including the case where a
+transformation is not invertible and the pseudoinverse is the best substitute available.
+
+
+\section{Linear transformation}
 
 Linear transformation $T$ obeys plus and scalar multiplication, and it's often written as:
 \[
@@ -2036,8 +1916,8 @@ Suppose input space $V$ and output space $W$ both have basis vectors. Then we ha
 
 $v_i$ represents the coordinates of input space, and $w_i$ represents which in output space.
 
-\subsection{\textbf{Change of basis}}
-\subsubsection{\textbf{Compression of image}}
+\section{Change of basis}
+\subsection{Compression of image}
 Suppose there is a $512 \times 512$ grayscale image $A$. A pixel means an entries of $A$.
 Usually a pixel contains 8 bits $x_i$, which means 256 levels of gray. So $x$ is in $R^{512^2}$.
 This is a huge space and it's impossible to transport. So we need to compress it.
@@ -2068,7 +1948,7 @@ the difference.
 The compressed coefficients is $\hat{c}$ which contains many 0s. And we can reconstruct
 the image by $\hat{x} = V\hat{c}$. This is the whole process of image compression.
 
-\subsubsection{\textbf{Wavelet basis}}
+\subsection{Wavelet basis}
 
 Wavelet basis is another choice of basis. It is more efficient than Fourier basis in
 some cases. Here is an example of Haar wavelet basis:
@@ -2098,7 +1978,7 @@ the last few basis only care about little parts of the signal.
 
 By the way, \textbf{JPEG2000} uses wavelet basis.
 
-\subsubsection{\textbf{Similarity under change of basis}}
+\subsection{Similarity under change of basis}
 
 Suppose a linear transformation $T$ has two different matrix representations $A$ and $B$
 under two different bases. Then $B$ and $A$ are similar.
@@ -2127,7 +2007,7 @@ Bring them together:
   B = MAM^{-1}
 \]
 
-\subsubsection{\textbf{Eigenvector basis}}
+\subsection{Eigenvector basis}
 
 If a basis is formed by eigenvectors, then what the $A$ is?
 
@@ -2142,9 +2022,9 @@ So the matrix representation of $T$ under the eigenvector basis is a diagonal ma
 This is the best basis but too hard to find in practice. So we often choose something cheaper
 and close to it like wavelet basis.
 
-\subsection{\textbf{Inverse and pseudoinverse}}
-\subsubsection{\textbf{Inverse}}
-There are 3 kinds of inverse: two-sided inverse, left inverse and right inverse.
+\section{Inverse and pseudoinverse}
+\subsection{Inverse}
+There are three kinds of inverse: two-sided inverse, left inverse and right inverse.
 
 For a full rank matrix, the inverse are two-sided:
 \[
@@ -2161,7 +2041,7 @@ We can analogize A's right inverse for full row rank:
   A^{-1}_{right} = A^{T}(AA^{T})^{-1}
 \]
 
-\subsubsection{\textbf{Pseudoinverse}}
+\subsection{Pseudoinverse}
 
 What's the inverse of $r < n $ and $r < m$ normal matrix $A$? We call it \textbf{pseudoinverse}.
 
@@ -2202,25 +2082,26 @@ Also:
 
 
 
-\newpage
-\thispagestyle{empty}
-\begin{center}
-    \vspace*{96pt}
-    \fontsize{60}{60}\customfont{7}\par
-    \fontsize{26}{31.2}\section{\textbf{Applications}}\par % 标题
-    \vspace{25pt}
-    \begin{center}
-      \fontsize{18}{21.6}\customfont\textit{Changed and yet the same, I rise again.}
-    \end{center}
-    \begin{flushright}
-      \fontsize{18}{21.6}\customfont\textit{--- Jacob Bernoulli}
-    \end{flushright}
-    \vfill
-\end{center}
+\chapter{Applications}
 
-\newpage
-\subsection{\textbf{Solution of $u_{k+1} = Au_k$}}
-\subsubsection{\textbf{Derivation}}
+\subsection*{Overview}
+
+The final chapter puts the machinery to work on problems that arise outside mathematics.
+The first two sections solve difference equations $u_{k+1} = A u_k$ and differential
+equations $\frac{du}{dt} = A u$. Both reduce to eigenvalues, which is why the previous
+chapter mattered.
+
+Markov matrices come next, describing systems that move between states with fixed
+probabilities. Their steady state is an eigenvector with eigenvalue one, and it gives the
+long-run behaviour of the system without any simulation.
+
+The chapter ends with Fourier series and the fast Fourier transform. The transform
+expresses a signal in the basis of eigenvectors of a shift, and the fast algorithm computes
+it in $n \log n$ steps instead of $n^2$.
+
+
+\section{Solution of $u_{k+1} = Au_k$}
+\subsection{Derivation}
 
 $u_{k+1} = Au_k$ is a typical difference equation. And we can rewrite it to:
 \[
@@ -2236,7 +2117,7 @@ Then we can diagonalize $u_k$:
 This is the general solution of $u_{k+1} = Au_k$. And we can see that the eigenvalues
 determine the behavior of $u_k$.
 
-\subsubsection{\textbf{Fibonacci sequence}}
+\subsection{Fibonacci sequence}
 
 Take an example of Fibonacci sequence:
 \[
@@ -2299,8 +2180,8 @@ That means:
   \right]
 \]
 
-\subsection{\textbf{Solution of $\frac{du}{dt} = Au$}}
-\subsubsection{\textbf{Example}}
+\section{Solution of $\frac{du}{dt} = Au$}
+\subsection{Example}
 
 $\frac{du}{dt} = Au$ is a typical differential equation. Let's see an example first:
 \begin{align*}
@@ -2345,7 +2226,7 @@ And we can get $c_1 = c_2 = 1/3$ by the initial condition. So the final solution
   \end{bmatrix})
 \]
 
-\subsubsection{\textbf{Stability analysis}}
+\subsection{Stability analysis}
 
 Now jump out the example and consider the stability of $u(t)$. $u(t) \to 0$ no matter what
 $u_0$ is when all eigenvalues of $A$ are negative. And there must be point out that if
@@ -2361,7 +2242,7 @@ We usually pay the most attention to the stability of second-order systems. In l
 algebra, this means that $A$ is a $2 \times 2$ matrix. And it is stable when $trace(A) < 0$
 and $\det A > 0$.
 
-\subsubsection{\textbf{General solution}}
+\subsection{General solution}
 
 For $\frac{du}{dt} = Au$, $A$ means $u_1$ and $u_2$ are coupled. If we want to
 decouple them, we should diagonalize $A$. Set $u = Sv$, then we have:
@@ -2387,8 +2268,8 @@ $e^{At}$ is often called \textbf{matrix exponential}. And it obeys Taylor's expa
 
 Obviously, $e^{At}$ goes to 0 when $Re[\lambda] < 0$.
 
-\subsection{\textbf{Markov matrix}}
-\subsubsection{\textbf{Definition and properties}}
+\section{Markov matrix}
+\subsection{Definition and properties}
 
 Markov matrix $A$ is a matrix that all entries positive and all columns sum to 1. This
 kind of matrix is widely used in probability and statistics.
@@ -2415,7 +2296,7 @@ So if a probability vector $v$ satisfies $\sum_{i=1}^{n} v_i = 1$, then $Av$ als
 satisfies this. If there is an eigenvalue bigger than 1 in absolute value, then $A^k v$
 will blow up. This is contradictory. So all other eigenvalues satisfy $|\lambda_i| < 1$.
 
-\subsubsection{\textbf{Usage}}
+\subsection{Usage}
 
 Markov matrix can be used to solve steady state problems. Suppose $u_{k+1} = Au_k$.
 
@@ -2470,8 +2351,8 @@ solution is:
   \end{bmatrix}
 \]
 
-\subsection{\textbf{Fourier series}}
-\subsubsection{\textbf{Projections with orthonormal basis}}
+\section{Fourier series}
+\subsection{Projections with orthonormal basis}
 
 For any $v$ in $R^n$, we can project it onto an orthonormal basis $q_1, q_2, \ldots, q_n$:
 \[
@@ -2498,7 +2379,7 @@ So we get:
 
 This is the basis of Fourier series.
 
-\subsubsection{\textbf{Fourier series}}
+\subsection{Fourier series}
 
 Here's Fourier series. Suppose we have a function $f(t)$ defined on $[-\pi, \pi]$.
 Then we can expand it to:
@@ -2533,8 +2414,8 @@ So it is clear that:
 
 Also $b_n$ is in the same way.
 
-\subsection{\textbf{Fast Fourier Transform}}
-\subsubsection{\textbf{Complex vectors and complex matrices}}
+\section{Fast Fourier Transform}
+\subsection{Complex vectors and complex matrices}
 
 A complex vector $z$ is in $C^n$, its length is defined as:
 \[
@@ -2546,10 +2427,10 @@ Inner product of two complex vectors $y$ and $x$ is changed as well, now it is $
 For a complex symmetric matrix(or Hermitian matrix) $A$, it is defined as $A^{H} = A$.
 We have talked about this in 5.3.
 
-For a orthogonal matrix $Q$, it is defined as $Q^{H}Q = I$. And we also changed its name
+For an orthogonal matrix $Q$, it is defined as $Q^{H}Q = I$. And we also changed its name
 to unitary matrix.
 
-\subsubsection{\textbf{Fourier matrix}}
+\subsection{Fourier matrix}
 
 Fourier matrix $F_n$ is a complex matrix whose entries are:
 \[
@@ -2567,9 +2448,9 @@ For example:
   \end{bmatrix}
 \]
 
-It is obvious that $F_4$ is a orthogonal matrix so $F_4^{-1} = F_4^{H}$.
+It is obvious that $F_4$ is an orthogonal matrix so $F_4^{-1} = F_4^{H}$.
 
-\subsubsection{\textbf{Fast Fourier Transform}}
+\subsection{Fast Fourier Transform}
 
 If we want to calculate $F_{64}$, we have to write down a $64 \times 64$ matrix. This is
 too large. So we need Fast Fourier Transform. Be aware that $\omega_{64} = (\omega_{32})^2$,
@@ -2601,7 +2482,10 @@ $\frac12 n \log n = 5120$. This is a huge improvement. So Fast Fourier Transform
 used in almost all fields of science and engineering and greatly changes our world.
 
 \newpage
-\section{\textbf{Afterwords}}
+\chapter*{Afterwords}
+\addcontentsline{toc}{chapter}{Afterwords}
+
+\linespread{1.55}\selectfont
 
 Months ago I talked with EE's dean Teacher Chen, he asked me the opinion of
 this course. I appreciated it quite a lot. But not everyone agreed with me. Many students
