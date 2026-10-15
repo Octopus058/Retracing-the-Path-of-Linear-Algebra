@@ -3,8 +3,8 @@
 % ---- Title Information ----
 \title{Retracing the Path of Linear Algebra}
 \author{Lancet Ross}
-\date{Oct 1, 2026}
-\version{1.1}
+\date{Oct 15th, 2026}
+\version{1.2}
 \extrainfo{``The contribution of mathematics, and of people, is not computation but intelligence. --- Gilbert Strang''}
 
 \cover{cover.pdf}
@@ -18,8 +18,9 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{enumitem}
-\usepackage{caption}
-\captionsetup[figure]{labelformat=empty}
+% Numbered captions are the house standard, so that \figref resolves.
+% The former \captionsetup[figure]{labelformat=empty} suppressed the "Figure N:"
+% prefix and is deliberately not restored.
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage{tikz}
@@ -134,11 +135,13 @@ In linear algebra, we describe a system of equations as a matrix equation:
 This is what you must remember. Linear algebra just solves questions $Ax = b$.
 
 \subsection{Row picture and column picture}
-Now we can draw its row picture:
+Now we can draw its row picture, \figref{fig:row-picture}:
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/1.1 Geometric interpretation of
     a system of equations/Row picture.png}
+    \caption{Row picture of the system: each equation is a line}
+    \label{fig:row-picture}
 \end{figure}
 
 Now the column picture. When you study linear algebra, you must know that columns are
@@ -151,11 +154,13 @@ eq. (1) can be interpreted as:
   \begin{bmatrix} 0 \\ 3 \end{bmatrix}
 \]
 
-And column picture:
+And column picture, \figref{fig:column-picture}:
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/1.1 Geometric interpretation of
     a system of equations/Column picture.png}
+    \caption{Column picture: a combination of the two column vectors}
+    \label{fig:column-picture}
 \end{figure}
 
 Now consider a 3-D case:
@@ -683,7 +688,7 @@ And $U$ is called row echelon form of $A$.
 
 \vspace{0.5em}
 \textbf{P.S.} Elimination does not change $N(A)$.
-\newpage
+
 Here we need to tell some definitions.
 \begin{itemize}
   \item \textbf{Rank}: The number of non-zero rows in echelon form of a matrix.
@@ -910,11 +915,12 @@ In this example, $m - r = 1$, so the last row of $E$ is a basis of $N(A^{T})$.
 \section{Graph and network}
 \subsection{Graph}
 
-Here is an example of a graph:
+Here is an example of a graph, \figref{fig:graph}:
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.56\textwidth]{assets/2.7 Graph and network/Graph.png}
   \caption{A graph with 4 nodes and 5 edges}
+  \label{fig:graph}
 \end{figure}
 
 This can represent many things, such as a road map, a social network and so on.
@@ -1034,11 +1040,12 @@ true for $N(A^{T})$ and $C(A)$.
 
 Projection of a vector $b$ onto a subspace $S$ is to find a vector $p$ in $S$ that is
 closest to $b$. The error vector $e = b - p$ is orthogonal to $S$. This is called
-\textbf{orthogonal projection}.
+\textbf{orthogonal projection}, drawn in \figref{fig:orthogonal-projection}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{assets/3.2 Orthogonal projection/Orthogonal projection.png}
   \caption{Orthogonal projection}
+  \label{fig:orthogonal-projection}
 \end{figure}
 
 We know $p$ is on $S$, assume there is a vector $a$ that spans $S$, then $p = xa$. Then we
@@ -1720,14 +1727,16 @@ Pay attention to the coefficients, they are not random. They are determined by $
 The coefficients in the completed square are the elimination multipliers, and those
 out of the square are the pivots.
 
-If we let $f(x, y) = 2x^2 + 12xy + 20y^2 = 1$, then we get an ellipse.
+If we let $f(x, y) = 2x^2 + 12xy + 20y^2 = 1$, then we get the ellipse in
+\figref{fig:ellipse}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{assets/5.4 Positive definition matrix/Ellipse.png}
   \caption{Ellipse of $f(x, y) = 1$}
+  \label{fig:ellipse}
 \end{figure}
 
-Also you can see the minimum point is the origin.
+Also you can see in \figref{fig:ellipse} that the minimum point is the origin.
 
 Till now, we can conclude that positive pivots, sum of squares, graph goes up and a
 minimum at the origin all connected together.
@@ -1762,11 +1771,12 @@ We know:
   x^{T}Ax = 2x_1^2 - 2x_1x_2 + 2x_2^2 - 2x_2x_3 + 2x_3^2
 \]
 
-Here is the figure of $f(x, y, z) = 1$.
+Here is the figure of $f(x, y, z) = 1$, in \figref{fig:ellipsoid}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{assets/5.4 Positive definition matrix/Ellipsoid.png}
   \caption{Ellipsoid of $f(x, y, z) = 1$}
+  \label{fig:ellipsoid}
 \end{figure}
 
 The three axes of the ellipsoid are determined by eigenvectors of $A$ and the lengths
@@ -1863,6 +1873,11 @@ $r$ is the rank of $A$. Then we have:
 
 Because $Av_i = \sigma_i u_i$ and there are no coupled terms. That proves they are the
 proper bases.
+
+Put the two bases side by side and the picture is complete. Diagonalization needs a full set
+of independent eigenvectors, and a symmetric matrix is the case that always supplies one.
+SVD asks for nothing except orthonormal bases, so every matrix has it. That is why it closes
+the chapter, and why it is the factorization most numerical software reaches for first.
 
 \chapter{Linear Transformations}
 
