@@ -64,20 +64,19 @@ Closing thoughts.
 
 ## Building the PDF
 
-You need a TeX distribution with XeLaTeX. A **full** TeX Live installation is required rather than a minimal one. The document class is bundled in this repository, so there is nothing extra to install.
+You need a TeX distribution with LuaLaTeX. A **full** TeX Live installation is required rather than a minimal one. The `scrbook` class ships with TeX Live, so there is nothing extra to install.
 
 ```bash
 latexmk
 ```
 
-A `.latexmkrc` is included, so `latexmk` selects XeLaTeX automatically and runs as many passes as the cross-references need.
+A `.latexmkrc` is included, so `latexmk` selects LuaLaTeX automatically and runs as many passes as the cross-references need.
 
 ```bash
 latexmk -c    # remove auxiliary files, keep the PDF
 latexmk -C    # remove everything, including the PDF
 ```
 
-The cover is a TikZ drawing in `cover.tex`, compiled to `cover.pdf`.
 
 ## License
 
